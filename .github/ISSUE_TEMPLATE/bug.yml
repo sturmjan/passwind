@@ -1,22 +1,22 @@
-name: Bug report / Chyba
-description: Something is not working / Něco nefunguje
+name: Bug report
+description: Something is not working
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for reporting. Please **never paste real passwords** or parts of them. / Prosím **nikdy nevkládejte skutečná hesla**. (Czech is welcome too / česky také.)
+        Thanks for reporting. Please **never paste real passwords** or parts of them.
   - type: textarea
     id: what
     attributes:
-      label: What happened? / Co se stalo?
-      description: What did you expect instead? / Co jste čekali?
+      label: What happened?
+      description: What did you expect instead?
     validations:
       required: true
   - type: textarea
     id: steps
     attributes:
-      label: Steps to reproduce / Jak chybu vyvolat
+      label: Steps to reproduce
       placeholder: |
         1. Open the page ...
         2. Click the password field ...
@@ -25,9 +25,9 @@ body:
   - type: input
     id: site
     attributes:
-      label: Website where it happened (optional) / Web (volitelné)
+      label: Website where it happened (optional)
   - type: input
     id: version
     attributes:
-      label: Extension and Chrome version / Verze doplňku a Chromu
+      label: Extension and Chrome version
       placeholder: "1.0.0 / Chrome 130"

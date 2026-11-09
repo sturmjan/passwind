@@ -1,15 +1,15 @@
-name: Feature request / Nápad na funkci
-description: What should it do? / Co by měl doplněk umět?
+name: Feature request
+description: What should Passwind do?
 labels: ["enhancement"]
 body:
   - type: textarea
     id: idea
     attributes:
-      label: Idea / Nápad
-      description: Describe what you would like and why. / Popište, co chcete a proč.
+      label: Idea
+      description: Describe what you would like and why.
     validations:
       required: true
   - type: textarea
     id: alternatives
     attributes:
-      label: Current workaround (optional) / Jak to řešíte dnes?
+      label: Current workaround (optional)
