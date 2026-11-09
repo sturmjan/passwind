@@ -1,6 +1,6 @@
 {
   "extName": {
-    "message": "Gerador de palavras-passe"
+    "message": "Passwind - Gerador de palavras-passe"
   },
   "extDescription": {
     "message": "Palavras-passe fortes com um clique. Deteta campos de palavra-passe, preenche a confirmação, verifica fugas de dados e copia para a área de transferência."

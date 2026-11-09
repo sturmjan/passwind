@@ -16,7 +16,7 @@
     cs: {
       feedback: 'Nahlásit chybu nebo navrhnout funkci',
       back: 'Zpět',
-      appTitle: 'Generátor hesel',
+      appTitle: 'Passwind',
       regen: 'Nové',
       regenTitle: 'Nové heslo',
       copy: 'Kopírovat',
@@ -95,7 +95,7 @@
     en: {
       feedback: 'Report a bug or suggest a feature',
       back: 'Back',
-      appTitle: 'Password Generator',
+      appTitle: 'Passwind',
       regen: 'New',
       regenTitle: 'New password',
       copy: 'Copy',
@@ -174,7 +174,7 @@
     de: {
       feedback: 'Fehler melden oder Funktion vorschlagen',
       back: 'Zurück',
-      appTitle: 'Passwortgenerator',
+      appTitle: 'Passwind',
       regen: 'Neu',
       regenTitle: 'Neues Passwort',
       copy: 'Kopieren',
@@ -253,7 +253,7 @@
     es: {
       feedback: 'Informar de un error o sugerir una función',
       back: 'Atrás',
-      appTitle: 'Generador de contraseñas',
+      appTitle: 'Passwind',
       regen: 'Nueva',
       regenTitle: 'Nueva contraseña',
       copy: 'Copiar',
@@ -332,7 +332,7 @@
     pt: {
       feedback: 'Comunicar um erro ou sugerir uma funcionalidade',
       back: 'Voltar',
-      appTitle: 'Gerador de palavras-passe',
+      appTitle: 'Passwind',
       regen: 'Nova',
       regenTitle: 'Nova palavra-passe',
       copy: 'Copiar',
@@ -411,7 +411,7 @@
     fr: {
       feedback: 'Signaler un bug ou suggérer une fonction',
       back: 'Retour',
-      appTitle: 'Générateur de mots de passe',
+      appTitle: 'Passwind',
       regen: 'Nouveau',
       regenTitle: 'Nouveau mot de passe',
       copy: 'Copier',
@@ -490,7 +490,7 @@
     it: {
       feedback: 'Segnala un errore o suggerisci una funzione',
       back: 'Indietro',
-      appTitle: 'Generatore di password',
+      appTitle: 'Passwind',
       regen: 'Nuova',
       regenTitle: 'Nuova password',
       copy: 'Copia',

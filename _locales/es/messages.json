@@ -1,6 +1,6 @@
 {
   "extName": {
-    "message": "Generador de contraseñas"
+    "message": "Passwind - Generador de contraseñas"
   },
   "extDescription": {
     "message": "Contraseñas seguras con un clic. Detecta campos de contraseña, rellena la confirmación, comprueba filtraciones y copia al portapapeles."

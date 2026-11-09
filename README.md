@@ -1,45 +1,51 @@
-# Generátor hesel / Password Generator
+# Passwind - Password Generator for Chrome
 
-Rozšíření pro Chrome: silná hesla jedním klikem, nabídka přímo u pole pro heslo, kontrola úniku, historie vložených hesel a mazání schránky. Všechno běží lokálně v prohlížeči.
+Strong passwords in one click, an offer right at the password field, breach check, history of inserted passwords and automatic clipboard clearing. Everything runs locally in your browser.
 
-*A Chrome extension: strong passwords in one click, an offer right at the password field, breach check, history of inserted passwords and clipboard clearing. Everything runs locally in the browser.*
-
-**Prezentace a zásady ochrany osobních údajů / Website and privacy policy:** `docs/index.html` (GitHub Pages: https://sturmjan.github.io/generator-hesel/)
+**Website and privacy policy:** https://sturmjan.github.io/passwind/ (source in `docs/index.html`)
 
 ![Popup](docs/img/popup-main.png)
 
-## Funkce / Features
+## Features
 
-- Délka 8-64 znaků, velká/malá písmena, čísla, speciální znaky, vlastní znaky, vynechání podobných znaků
-- Nabídka u polí pro heslo (u registrace automaticky), vloží i potvrzení hesla
-- Zobrazení hesla v poli (najetí myší, dvojklik, focus, Ctrl) a ikona kopírování přímo v poli
-- Kontrola úniku přes Have I Been Pwned (k-anonymity, odesílá se jen 5 znaků otisku)
-- Historie vložených hesel (do zavření prohlížeče / trvale / vypnuto)
-- Automatické mazání schránky (30 s / 1 min / 2 min)
-- 7 jazyků (cs, en, de, es, pt, fr, it), světlý a tmavý režim
+- 8-64 characters, upper/lower case, digits, symbols, custom allowed characters, look-alike exclusion (I l 1 O 0)
+- Offer at password fields (automatic on sign-up forms), fills the confirmation field too, right-click menu entry
+- Show the password in the field (hover, double click, focus or Ctrl) with a copy icon right in the field
+- Breach check via Have I Been Pwned (k-anonymity: only 5 hash characters are sent)
+- History of inserted passwords (until the browser closes / permanent / off)
+- Automatic clipboard clearing (30 s / 1 min / 2 min)
+- 7 languages (en, cs, de, es, pt, fr, it), light and dark mode
 
-## Instalace / Install
+## Install
 
-1. Stáhněte repozitář a rozbalte ho. / Download and unzip the repository.
-2. `chrome://extensions` -> zapnout **Režim pro vývojáře** / **Developer mode**.
-3. **Načíst rozbalené** / **Load unpacked** -> vyberte složku s `manifest.json`.
+Chrome Web Store: coming soon. Until then:
 
-## Chyby a nápady / Bugs and ideas
+1. Download this repository (Code -> Download ZIP) and unzip it.
+2. Open `chrome://extensions` and enable **Developer mode**.
+3. Click **Load unpacked** and choose the folder that contains `manifest.json`.
 
-Založte [issue](https://github.com/sturmjan/generator-hesel/issues/new/choose). Prosím **nikdy nevkládejte skutečná hesla**. / Please **never paste real passwords**.
+## Bugs and ideas
 
-## Struktura / Structure
+Open an [issue](https://github.com/sturmjan/passwind/issues/new/choose) (English or Czech). Please **never paste real passwords**.
 
-| Cesta | Obsah |
+## Project layout
+
+| Path | Contents |
 | --- | --- |
 | `manifest.json` | Manifest V3 |
-| `src/` | `content.js` (pole na stránkách), `background.js` (menu, schránka), `generator.js`, `i18n.js`, `hibp.js`, `offscreen.*` |
-| `popup/` | okno rozšíření |
-| `_locales/` | název a popis pro obchod |
-| `tools/` | skript na ikony, ukázková stránka `demo-signup.html` |
-| `docs/` | prezentační stránka + screenshoty |
-| `STORE.md` | podklady pro Chrome Web Store |
+| `src/` | `content.js` (page fields), `background.js` (menu, clipboard timer), `generator.js`, `i18n.js`, `hibp.js`, `offscreen.*` |
+| `popup/` | extension popup |
+| `_locales/` | store name and description |
+| `tools/` | icon script, `demo-signup.html` test page |
+| `docs/` | website + screenshots (GitHub Pages) |
+| `STORE.md` | Chrome Web Store listing notes |
 
-## Licence
+## License
 
-MIT, viz `LICENSE`.
+MIT, see `LICENSE`.
+
+---
+
+## Česky
+
+Rozšíření pro Chrome: silná hesla jedním klikem, nabídka u pole pro heslo, kontrola úniku, historie vložených hesel a mazání schránky. Vše běží lokálně v prohlížeči. Chyby a nápady zakládejte jako issue na GitHubu (česky i anglicky). Ruční instalace: `chrome://extensions` -> Režim pro vývojáře -> Načíst rozbalené.

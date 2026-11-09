@@ -1,49 +1,47 @@
-# Podklady pro Chrome Web Store
+# Chrome Web Store listing notes
 
-## Název
-Generátor hesel (lokalizováno: cs, en, de, es, pt_PT, fr, it přes `_locales/`)
+Primary listing language: **English**. Localized name/description live in `_locales/` (en, cs, de, es, pt_PT, fr, it). The UI language follows the browser and can be changed in the popup.
 
-## Krátký popis (max 132 znaků)
-Silná hesla jedním klikem. Rozpozná pole pro heslo, vloží heslo i do potvrzení, zkontroluje únik a zkopíruje ho do schránky.
+## Name
+Passwind - Password Generator
 
-## Dlouhý popis
-Jednoduchý generátor silných hesel přímo v prohlížeči.
+## Short description (max 132 chars)
+Strong passwords in one click. Detects password fields, fills the confirmation, checks for breaches and copies to the clipboard.
 
-- Kliknutím na ikonu vygenerujete heslo s nastavitelnou délkou a sadou znaků (velká/malá písmena, čísla, speciální znaky, vlastní povolené znaky, vynechání podobných znaků).
-- Výchozí nastavení je silné (20 znaků, všechny skupiny znaků).
-- U polí pro heslo na stránce se zobrazí malá ikona. U registračních formulářů se nabídka otevře automaticky.
-- Jedním kliknutím se heslo vloží do pole, do pole pro potvrzení hesla (jde vypnout) a zkopíruje do schránky.
-- Funguje i přes pravé tlačítko myši: "Vygenerovat heslo a vložit".
-- Kontrola úniku přes Have I Been Pwned (k-anonymity): odesílá se jen prvních 5 znaků SHA-1 otisku, heslo prohlížeč neopustí. Jde zkontrolovat vygenerované i vlastní heslo.
-- Zobrazení hesla v poli na stránce: při najetí myší, dvojklikem, po kliknutí do pole nebo při držení Ctrl (nebo vypnuto).
-- Automatické vymazání schránky po 30 s / 1 min / 2 min.
-- Historie vložených hesel: do zavření prohlížeče (výchozí), trvale, nebo vůbec.
-- Světlý i tmavý vzhled podle systému. Jazyky: čeština, angličtina, němčina, španělština, portugalština, francouzština, italština.
-- Hesla se generují lokálně kryptograficky bezpečným generátorem (Web Crypto).
+## Detailed description
+Generate strong passwords right in your browser, with no accounts and no servers.
 
-## Zdůvodnění oprávnění (do formuláře "Privacy practices")
-- `storage`: uložení nastavení generátoru a historie vložených hesel (podle volby uživatele jen v paměti prohlížeče, nebo místně).
-- `clipboardWrite`: kopírování vygenerovaného hesla do schránky a její pozdější vymazání.
-- `contextMenus`: položka "Vygenerovat heslo a vložit" v kontextové nabídce.
-- `alarms`: časovač pro automatické vymazání schránky.
-- `offscreen`: vymazání schránky (service worker k ní nemá přístup).
-- Content script na `http(s)://*/*`: rozpoznání polí pro heslo, vložení hesla a jeho zobrazení v poli. Stránky se nečtou ani neodesílají.
-- Síťový dotaz na `https://api.pwnedpasswords.com/range/<5 znaků>` jen po kliknutí uživatele na "Zkontrolovat únik".
+- Click the icon to generate a password: 8-64 characters, upper/lower case, digits, symbols, your own allowed characters, look-alike exclusion.
+- A small icon appears in password fields. On sign-up forms the offer opens automatically, and one click fills the field and the confirmation field.
+- Show the password in the field on hover, double click, focus or while holding Ctrl, with a copy icon right in the field.
+- Breach check via Have I Been Pwned (k-anonymity): only the first 5 characters of the SHA-1 hash are sent, the password never leaves your browser.
+- Optional history of inserted passwords (until the browser closes, permanent, or off) so a failed sign-up never loses a password.
+- Automatic clipboard clearing after 30 s, 1 or 2 minutes.
+- Also in the right-click menu: "Generate password and insert".
+- English, Czech, German, Spanish, Portuguese, French and Italian. Light and dark mode.
+- Open source (MIT): https://github.com/sturmjan/passwind
 
-Single purpose: generování a vkládání hesel.
-Data usage: žádná data se neshromažďují. Remote code: ne.
+## Category
+Productivity
 
-## Zásady ochrany osobních údajů
-Rozšíření Generátor hesel neshromažďuje ani nepředává žádné osobní údaje vývojáři.
-Hesla se generují výhradně lokálně v prohlížeči.
-Uložena jsou nastavení generátoru (synchronizované úložiště prohlížeče) a volitelně historie vložených hesel (výchozí: jen v paměti do zavření prohlížeče, na přání trvale v místním úložišti, nebo vůbec).
-Při ručním spuštění kontroly úniku se na službu Have I Been Pwned odešle pouze prvních 5 znaků SHA-1 otisku hesla; samotné heslo ani celý otisk se neodesílá.
-Rozšíření nečte obsah stránek kromě zjištění, zda na stránce existuje pole pro heslo.
+## Privacy practices form
+- Single purpose: generating strong passwords and inserting them into fields on web pages.
+- Data usage: tick "Authentication information" (passwords are handled locally). Nothing is sold or transferred, nothing is used for purposes unrelated to the core function or for creditworthiness.
+- Remote code: no.
+- Privacy policy URL: https://sturmjan.github.io/passwind/#soukromi (GitHub Pages must be enabled; the page shows English by default).
 
-## Grafika (zbývá vytvořit)
-- Ikona 128x128: `icons/icon128.png` (hotovo, modrá)
-- Screenshoty 1280x800: min. 1 (popup + nabídka u pole pro heslo)
-- Malá promo dlaždice 440x280 (volitelné, doporučeno)
+## Permission justifications
+- `storage`: settings and the optional history of inserted passwords.
+- `clipboardWrite`: copy the password and wipe it from the clipboard later.
+- `contextMenus`: "Generate password and insert" in the right-click menu.
+- `alarms`, `offscreen`: timer and hidden document for the automatic clipboard wipe (service workers cannot access the clipboard).
+- Content script on `http(s)://*/*`: detect password fields, show the offer, insert and reveal the password. Page content is neither read nor sent anywhere.
+- Network: `https://api.pwnedpasswords.com/range/<5 hash chars>` only when the user clicks "Check for breaches".
 
-## Balíček
-ZIP obsahující `manifest.json`, `_locales/`, `src/`, `popup/`, `icons/` (bez `tools/`, `STORE.md`).
+## Graphics (still to do)
+- Icon 128x128: `icons/icon128.png` (done)
+- Screenshots 1280x800 (1-5): popup, in-page offer, filled fields (raw shots in `docs/img/`)
+- Small promo tile 440x280 (optional)
+
+## Package
+ZIP containing `manifest.json`, `_locales/`, `src/`, `popup/`, `icons/` only (no `tools/`, `docs/`, `.github/`, `*.md`).

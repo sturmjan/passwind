@@ -1,33 +1,33 @@
-name: Chyba / Bug report
-description: Něco nefunguje / Something is not working
+name: Bug report / Chyba
+description: Something is not working / Něco nefunguje
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        Děkuji za nahlášení. Prosím **nikdy nevkládejte skutečná hesla** ani jejich části. / Please **never paste real passwords**.
+        Thanks for reporting. Please **never paste real passwords** or parts of them. / Prosím **nikdy nevkládejte skutečná hesla**. (Czech is welcome too / česky také.)
   - type: textarea
     id: what
     attributes:
-      label: Co se stalo? / What happened?
-      description: Jak chyba vypadá a co jste čekali? / What did you expect?
+      label: What happened? / Co se stalo?
+      description: What did you expect instead? / Co jste čekali?
     validations:
       required: true
   - type: textarea
     id: steps
     attributes:
-      label: Jak chybu vyvolat / Steps to reproduce
+      label: Steps to reproduce / Jak chybu vyvolat
       placeholder: |
-        1. Otevřít stránku ...
-        2. Kliknout do pole pro heslo ...
+        1. Open the page ...
+        2. Click the password field ...
     validations:
       required: true
   - type: input
     id: site
     attributes:
-      label: Web, kde se to stalo (volitelné) / Website (optional)
+      label: Website where it happened (optional) / Web (volitelné)
   - type: input
     id: version
     attributes:
-      label: Verze doplňku a Chromu / Extension and Chrome version
+      label: Extension and Chrome version / Verze doplňku a Chromu
       placeholder: "1.0.0 / Chrome 130"

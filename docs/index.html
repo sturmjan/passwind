@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="cs" data-lang="cs">
+<html lang="en" data-lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Generátor hesel - rozšíření pro Chrome / Password Generator for Chrome</title>
-  <meta name="description" content="Silná hesla jedním klikem, kontrola úniku, historie, vše lokálně v prohlížeči. / Strong passwords in one click, breach check, history, all local.">
+  <title>Passwind - Password Generator for Chrome</title>
+  <meta name="description" content="Strong passwords in one click, breach check, history, everything local in your browser. / Silná hesla jedním klikem.">
   <link rel="icon" href="img/icon128.png">
   <style>
     :root { --bg:#f2f2f7; --card:#fff; --text:#1c1c1e; --muted:#6e6e73; --sep:rgba(60,60,67,.16); --blue:#007aff; --green:#34c759; --orange:#ff9500; --purple:#af52de; }
@@ -65,7 +65,7 @@
 <body>
 <nav>
   <div class="wrap">
-    <a class="brand" href="#top"><img src="img/icon128.png" alt=""><span lang="cs">Generátor hesel</span><span lang="en">Password Generator</span></a>
+    <a class="brand" href="#top"><img src="img/icon128.png" alt="">Passwind</a>
     <div class="links">
       <a href="#funkce"><span lang="cs">Funkce</span><span lang="en">Features</span></a>
       <a href="#instalace"><span lang="cs">Instalace</span><span lang="en">Install</span></a>
@@ -87,9 +87,9 @@
     <div class="btns">
       <span class="btn disabled"><span lang="cs">Chrome Web Store (připravuje se)</span><span lang="en">Chrome Web Store (coming soon)</span></span>
       <a class="btn primary" href="#instalace"><span lang="cs">Jak nainstalovat</span><span lang="en">How to install</span></a>
-      <a class="btn ghost" href="https://github.com/sturmjan/generator-hesel">GitHub</a>
+      <a class="btn ghost" href="https://github.com/sturmjan/passwind">GitHub</a>
     </div>
-    <img class="shot" src="img/popup-main.png" alt="Popup rozšíření / extension popup">
+    <img class="shot" src="img/popup-main.png" alt="Passwind popup">
   </div>
 </header>
 
@@ -163,7 +163,7 @@
     <div class="card" style="max-width:780px;margin:0 auto">
       <h3><span lang="cs">Ruční instalace (vývojářský režim)</span><span lang="en">Manual install (developer mode)</span></h3>
       <ol class="steps">
-        <li><span lang="cs">Stáhni repozitář jako ZIP z <a href="https://github.com/sturmjan/generator-hesel/archive/refs/heads/main.zip">GitHubu</a> a rozbal ho.</span><span lang="en">Download the repository as a ZIP from <a href="https://github.com/sturmjan/generator-hesel/archive/refs/heads/main.zip">GitHub</a> and unzip it.</span></li>
+        <li><span lang="cs">Stáhni repozitář jako ZIP z <a href="https://github.com/sturmjan/passwind/archive/refs/heads/main.zip">GitHubu</a> a rozbal ho.</span><span lang="en">Download the repository as a ZIP from <a href="https://github.com/sturmjan/passwind/archive/refs/heads/main.zip">GitHub</a> and unzip it.</span></li>
         <li><span lang="cs">Otevři <code>chrome://extensions</code> a zapni <b>Režim pro vývojáře</b>.</span><span lang="en">Open <code>chrome://extensions</code> and enable <b>Developer mode</b>.</span></li>
         <li><span lang="cs">Klikni na <b>Načíst rozbalené</b> a vyber složku s <code>manifest.json</code>.</span><span lang="en">Click <b>Load unpacked</b> and choose the folder containing <code>manifest.json</code>.</span></li>
         <li><span lang="cs">Ikonu rozšíření si připni na lištu. Hotovo.</span><span lang="en">Pin the extension icon to the toolbar. Done.</span></li>
@@ -179,7 +179,7 @@
 
     <div class="policy" lang="cs">
       <h3>Zásady ochrany osobních údajů</h3>
-      <p><i>Platné od 9. 11. 2026.</i> Rozšíření „Generátor hesel“ neshromažďuje, nesleduje ani nepředává žádné osobní údaje vývojáři ani třetím stranám. Nemá žádné vlastní servery ani analytiku.</p>
+      <p><i>Platné od 9. 11. 2026.</i> Rozšíření „Passwind“ neshromažďuje, nesleduje ani nepředává žádné osobní údaje vývojáři ani třetím stranám. Nemá žádné vlastní servery ani analytiku.</p>
       <h3>Co se děje s hesly</h3>
       <ul class="plain">
         <li>Hesla se generují výhradně lokálně v prohlížeči pomocí Web Crypto.</li>
@@ -201,7 +201,7 @@
         <tr><td>Přístup k <code>http(s)://*/*</code></td><td>Rozpoznání polí pro heslo, nabídka u pole, vložení a zobrazení hesla v poli. Obsah stránek se nečte ani neodesílá.</td></tr>
       </table>
       <h3>Zdrojový kód a kontakt</h3>
-      <p>Kód je otevřený: <a href="https://github.com/sturmjan/generator-hesel">github.com/sturmjan/generator-hesel</a>. Dotazy, chyby a nápady zakládej jako <a href="https://github.com/sturmjan/generator-hesel/issues/new/choose">issue na GitHubu</a>.</p>
+      <p>Kód je otevřený: <a href="https://github.com/sturmjan/passwind">github.com/sturmjan/passwind</a>. Dotazy, chyby a nápady zakládej jako <a href="https://github.com/sturmjan/passwind/issues/new/choose">issue na GitHubu</a>.</p>
 
       <h3>Informace pro Chrome Web Store</h3>
       <div class="note"><b>Single purpose:</b> generování silných hesel a jejich vkládání do polí na stránkách. <b>Remote code:</b> ne. <b>Prodej dat:</b> ne.</div>
@@ -212,7 +212,7 @@
 
     <div class="policy" lang="en">
       <h3>Privacy policy</h3>
-      <p><i>Effective 9 November 2026.</i> The "Password Generator" extension does not collect, track or transmit any personal data to the developer or to third parties. It has no servers and no analytics.</p>
+      <p><i>Effective 9 November 2026.</i> The "Passwind" extension does not collect, track or transmit any personal data to the developer or to third parties. It has no servers and no analytics.</p>
       <h3>What happens to passwords</h3>
       <ul class="plain">
         <li>Passwords are generated entirely locally in the browser using Web Crypto.</li>
@@ -234,7 +234,7 @@
         <tr><td>Access to <code>http(s)://*/*</code></td><td>Detecting password fields, the offer next to the field, inserting and revealing the password. Page content is neither read nor sent.</td></tr>
       </table>
       <h3>Source code and contact</h3>
-      <p>The code is open: <a href="https://github.com/sturmjan/generator-hesel">github.com/sturmjan/generator-hesel</a>. Please file questions, bugs and ideas as a <a href="https://github.com/sturmjan/generator-hesel/issues/new/choose">GitHub issue</a>.</p>
+      <p>The code is open: <a href="https://github.com/sturmjan/passwind">github.com/sturmjan/passwind</a>. Please file questions, bugs and ideas as a <a href="https://github.com/sturmjan/passwind/issues/new/choose">GitHub issue</a>.</p>
 
       <h3>Chrome Web Store submission notes</h3>
       <div class="note"><b>Single purpose:</b> generating strong passwords and inserting them into page fields. <b>Remote code:</b> no. <b>Selling data:</b> no.</div>
@@ -250,9 +250,9 @@
     <h2><span lang="cs">Chyba nebo nápad?</span><span lang="en">Found a bug or have an idea?</span></h2>
     <p class="sub"><span lang="cs">Napiš to na GitHub. Stačí účet na GitHubu, zbytek je formulář. Rozšíření má odkaz přímo v okně.</span><span lang="en">Post it on GitHub. A GitHub account and a short form is all it takes. The extension links there from its window too.</span></p>
     <div class="btns">
-      <a class="btn primary" href="https://github.com/sturmjan/generator-hesel/issues/new?template=bug.yml"><span lang="cs">Nahlásit chybu</span><span lang="en">Report a bug</span></a>
-      <a class="btn ghost" href="https://github.com/sturmjan/generator-hesel/issues/new?template=feature.yml"><span lang="cs">Navrhnout funkci</span><span lang="en">Suggest a feature</span></a>
-      <a class="btn ghost" href="https://github.com/sturmjan/generator-hesel/issues"><span lang="cs">Všechna hlášení</span><span lang="en">All issues</span></a>
+      <a class="btn primary" href="https://github.com/sturmjan/passwind/issues/new?template=bug.yml"><span lang="cs">Nahlásit chybu</span><span lang="en">Report a bug</span></a>
+      <a class="btn ghost" href="https://github.com/sturmjan/passwind/issues/new?template=feature.yml"><span lang="cs">Navrhnout funkci</span><span lang="en">Suggest a feature</span></a>
+      <a class="btn ghost" href="https://github.com/sturmjan/passwind/issues"><span lang="cs">Všechna hlášení</span><span lang="en">All issues</span></a>
     </div>
   </div>
 </section>
@@ -260,14 +260,14 @@
 <footer>
   <div class="wrap">
     <span lang="cs">Open source pod licencí MIT.</span><span lang="en">Open source under the MIT license.</span>
-    · <a href="https://github.com/sturmjan/generator-hesel">GitHub</a>
+    · <a href="https://github.com/sturmjan/passwind">GitHub</a>
   </div>
 </footer>
 
 <script>
   function setLang(l) { document.documentElement.setAttribute('data-lang', l); document.documentElement.lang = l; try { localStorage.setItem('lang', l); } catch (e) {} }
   var saved = null; try { saved = localStorage.getItem('lang'); } catch (e) {}
-  setLang(saved || (/^cs|^sk/i.test(navigator.language || '') ? 'cs' : 'en'));
+  setLang(saved === 'cs' ? 'cs' : 'en');
 </script>
 </body>
 </html>

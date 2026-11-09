@@ -1,6 +1,6 @@
 {
   "extName": {
-    "message": "Generatore di password"
+    "message": "Passwind - Generatore di password"
   },
   "extDescription": {
     "message": "Password sicure con un clic. Rileva i campi password, compila la conferma, controlla le violazioni e copia negli appunti."
