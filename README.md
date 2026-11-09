@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/img/logo-animated.svg" width="120" alt="Passwind logo"></p>
+
 # Passwind - Password Generator for Chrome
 
 Strong passwords in one click, an offer right at the password field, breach check, history of inserted passwords and automatic clipboard clearing. Everything runs locally in your browser.
@@ -36,7 +38,8 @@ Open an [issue](https://github.com/sturmjan/passwind/issues/new/choose) (English
 | `src/` | `content.js` (page fields), `background.js` (menu, clipboard timer), `generator.js`, `i18n.js`, `hibp.js`, `offscreen.*` |
 | `popup/` | extension popup |
 | `_locales/` | store name and description |
-| `tools/` | icon script, `demo-signup.html` test page |
+| `assets/` | logo sources (SVG): `logo*.svg`, rounded `icon*.svg`; PNG icons in `icons/` are rendered from `icon.svg` |
+| `tools/` | `demo-signup.html` test page |
 | `docs/` | website + screenshots (GitHub Pages) |
 | `STORE.md` | Chrome Web Store listing notes |
 

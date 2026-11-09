@@ -329,6 +329,14 @@
     $(id).addEventListener(id === 'length' || id === 'symbolChars' ? 'input' : 'change', onChange);
   }
 
+  // Logo plays once when the popup opens (and on hover via CSS); the toolbar icon animates too.
+  const brand = document.querySelector('.brand');
+  if (brand) {
+    brand.classList.add('play');
+    setTimeout(() => brand.classList.remove('play'), 1400);
+  }
+  notify({ type: 'icon-anim' });
+
   fillLanguageList();
   chrome.storage.sync.get(G.DEFAULTS, (stored) => {
     settings = { ...G.DEFAULTS, ...stored };

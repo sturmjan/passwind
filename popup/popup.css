@@ -316,3 +316,17 @@ a.navrow { text-decoration: none; color: var(--text); }
 a.navrow::after { transform: rotate(-45deg); }
 .feedback .ico { background: #af52de; }
 .col > a.navrow { margin-top: 4px; }
+
+/* logo in the header: unlocks on hover and once when the popup opens */
+.brand { width: 36px; height: 36px; flex: none; overflow: visible; }
+.brand .shackle { transform-box: view-box; transform-origin: 485px 520px; }
+.brand .loop-lock { transform-box: view-box; transform-origin: 627px 678px; }
+.brand:hover .shackle, .brand.play .shackle { animation: b-unlock 1.1s cubic-bezier(.45, 0, .25, 1); }
+.brand:hover .loop-lock, .brand.play .loop-lock { animation: b-pulse 1.1s; }
+.brand:hover .keyglow, .brand.play .keyglow { animation: b-glow 1.1s; }
+.brand:hover .sheen-rect, .brand.play .sheen-rect { animation: b-sweep 1.1s .15s; }
+@keyframes b-unlock { 0% { transform: none; } 30%, 52% { transform: translateY(-64px) rotate(-16deg); } 82%, 100% { transform: none; } }
+@keyframes b-pulse { 0%, 80% { transform: scale(1); } 86% { transform: scale(1.04); } 100% { transform: scale(1); } }
+@keyframes b-glow { 0%, 78% { opacity: 0; } 86% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes b-sweep { 0% { opacity: 1; transform: translateX(-700px); } 100% { opacity: 1; transform: translateX(1500px); } }
+@media (prefers-reduced-motion: reduce) { .brand * { animation: none !important; } }

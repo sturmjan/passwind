@@ -33,6 +33,34 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     .catch(() => {});
 });
 
+// ---------- toolbar icon animation ----------
+// Chrome has no hover event for the toolbar button, so the logo animates when the popup opens
+// and after a password was inserted. Frames are pre-rendered PNGs (service workers cannot render SVG).
+
+const ANIM_FRAMES = 14;
+const ANIM_STEP_MS = 90;
+const RESTING_ICON = { 16: 'icons/icon16.png', 32: 'icons/icon32.png' };
+let animating = false;
+
+function playIconAnimation() {
+  if (animating) return;
+  animating = true;
+  let i = 0;
+  const step = () => {
+    if (i >= ANIM_FRAMES) {
+      chrome.action.setIcon({ path: RESTING_ICON }).catch(() => {});
+      animating = false;
+      return;
+    }
+    const n = String(i++).padStart(2, '0');
+    chrome.action
+      .setIcon({ path: { 16: `icons/anim/f${n}-16.png`, 32: `icons/anim/f${n}-32.png` } })
+      .catch(() => {});
+    setTimeout(step, ANIM_STEP_MS);
+  };
+  step();
+}
+
 // ---------- history of inserted passwords ----------
 // 'session' lives in memory only (gone when the browser closes), 'local' stays on disk.
 
@@ -82,6 +110,9 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 chrome.runtime.onMessage.addListener((msg) => {
   if (!msg) return;
-  if (msg.type === 'history-add') addHistory(msg.password, msg.host);
+  if (msg.type === 'history-add') {
+    addHistory(msg.password, msg.host);
+    playIconAnimation();
+  } else if (msg.type === 'icon-anim') playIconAnimation();
   else if (msg.type === 'schedule-clear') scheduleClear().catch(() => {});
 });
