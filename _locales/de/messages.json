@@ -1,0 +1,8 @@
+{
+  "extName": {
+    "message": "Passwortgenerator"
+  },
+  "extDescription": {
+    "message": "Starke Passwörter mit einem Klick. Erkennt Passwortfelder, füllt das Bestätigungsfeld, prüft auf Datenlecks und kopiert in die Zwischenablage."
+  }
+}

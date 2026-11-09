@@ -1,0 +1,15 @@
+name: Nápad na funkci / Feature request
+description: Co by doplněk měl umět? / What should it do?
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Nápad / Idea
+      description: Popište, co byste chtěli a k čemu by vám to bylo. / Describe what you need and why.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Jak to řešíte dnes? (volitelné) / Current workaround (optional)

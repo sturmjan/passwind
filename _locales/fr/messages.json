@@ -1,0 +1,8 @@
+{
+  "extName": {
+    "message": "Générateur de mots de passe"
+  },
+  "extDescription": {
+    "message": "Des mots de passe forts en un clic. Détecte les champs, remplit la confirmation, vérifie les fuites et copie dans le presse-papiers."
+  }
+}

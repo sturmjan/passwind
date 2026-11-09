@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <title>Password Generator</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <img src="../icons/icon48.png" alt="" width="30" height="30">
+    <h1 data-i18n="appTitle"></h1>
+    <select id="lang" class="lang" aria-label="Language">
+      <option value="auto" data-i18n="langAuto"></option>
+    </select>
+  </header>
+
+  <div class="cols">
+    <!-- 1: generator -->
+    <div class="col">
+      <section class="card output">
+        <div class="pwbox">
+          <div id="pw" class="pw" aria-live="polite"></div>
+          <button id="pwCopy" type="button" class="icon-btn pw-copy" data-i18n-title="copyTitle"></button>
+          <span id="pwTip" class="tip" role="status"></span>
+        </div>
+        <div class="meter"><div id="bar"></div></div>
+        <div id="strength" class="strength"></div>
+        <div class="actions">
+          <button id="regen" type="button" class="pill" data-i18n="regen" data-i18n-title="regenTitle"></button>
+          <button id="copy" type="button" class="pill" data-i18n="copy" data-i18n-title="copyTitle"></button>
+        </div>
+        <div class="check">
+          <button id="hibpBtn" type="button" class="mini" data-i18n="hibpCheck"></button>
+          <span id="hibpResult" class="hibp"></span>
+        </div>
+      </section>
+
+      <button id="insert" type="button" class="primary" data-i18n="insert"></button>
+      <div id="status" class="status"></div>
+
+      <a id="feedback" class="card navrow feedback" href="https://github.com/sturmjan/generator-hesel/issues/new/choose" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span>
+        <span class="st" data-i18n="feedback"></span>
+      </a>
+
+
+
+    </div>
+
+    <!-- 3: accordion -->
+    <div class="col right">
+    <div class="acc" id="accBox">
+      <details class="card" name="acc" open>
+        <summary>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 7v5l3 2"/></svg></span>
+          <span class="st" data-i18n="historyTitle"></span><span id="historyCount" class="badge"></span>
+        </summary>
+        <div class="body">
+          <div class="hist-actions">
+            <button id="historyToggle" type="button" class="mini"></button>
+            <button id="historyClear" type="button" class="mini danger" data-i18n="historyClear"></button>
+          </div>
+          <div id="historyList" class="hist-list"></div>
+        </div>
+      </details>
+
+      <details class="card" name="acc">
+        <summary>
+          <span class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+          <span class="st" data-i18n="autofillTitle"></span>
+        </summary>
+        <div class="body">
+          <label class="row sel"><span data-i18n="offerMode"></span>
+            <select id="offerMode">
+              <option value="smart" data-i18n="offerSmart"></option>
+              <option value="always" data-i18n="offerAlways"></option>
+              <option value="icon" data-i18n="offerIcon"></option>
+              <option value="off" data-i18n="offerOff"></option>
+            </select>
+          </label>
+          <label class="row"><span data-i18n="fillConfirm"></span><input id="fillConfirm" type="checkbox"></label>
+          <label class="row"><span data-i18n="autoCopy"></span><input id="autoCopy" type="checkbox"></label>
+          <label class="row sel"><span data-i18n="clipClear"></span>
+            <select id="clipboardClear">
+              <option value="0" data-i18n="off"></option>
+              <option value="30">30 s</option>
+              <option value="60">1 min</option>
+              <option value="120">2 min</option>
+            </select>
+          </label>
+          <label class="row sel"><span data-i18n="historyMode"></span>
+            <select id="historyMode">
+              <option value="session" data-i18n="histSession"></option>
+              <option value="local" data-i18n="histLocal"></option>
+              <option value="off" data-i18n="histOff"></option>
+            </select>
+          </label>
+        </div>
+      </details>
+
+      <details class="card" name="acc">
+        <summary>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></span>
+          <span class="st" data-i18n="hibpTitle"></span>
+        </summary>
+        <div class="body">
+          <div class="row sel">
+            <input id="hibpInput" type="password" autocomplete="off" spellcheck="false" data-i18n-ph="hibpPlaceholder">
+            <button id="hibpCustomBtn" type="button" class="mini wide" data-i18n="hibpCheck"></button>
+            <span id="hibpCustomResult" class="hibp"></span>
+            <span class="note" data-i18n="hibpNote"></span>
+          </div>
+        </div>
+      </details>
+      <button id="openSettings" type="button" class="navrow">
+        <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg></span>
+        <span class="st" data-i18n="settings"></span><span id="settingsSummary" class="badge"></span>
+      </button>
+    </div>
+
+    <div id="settingsPanel" hidden>
+      <div class="page-head">
+        <button id="closeSettings" type="button" class="back"><span aria-hidden="true">&#8249;</span> <span data-i18n="back"></span></button>
+        <h2 data-i18n="settings"></h2>
+        <button id="reset" type="button" class="link head-link" data-i18n="reset"></button>
+      </div>
+      <section class="card list">
+        <label class="row len">
+          <span class="row-top"><span data-i18n="length"></span><b id="lenVal"></b></span>
+          <input id="length" type="range" min="8" max="64" step="1">
+        </label>
+        <label class="row"><span data-i18n="upper"></span><input id="upper" type="checkbox"></label>
+        <label class="row"><span data-i18n="lower"></span><input id="lower" type="checkbox"></label>
+        <label class="row"><span data-i18n="digits"></span><input id="digits" type="checkbox"></label>
+        <label class="row"><span data-i18n="symbols"></span><input id="symbols" type="checkbox"></label>
+        <label class="row sym"><span data-i18n="symbolChars"></span><input id="symbolChars" type="text" maxlength="40" spellcheck="false"></label>
+        <label class="row"><span data-i18n="ambiguous"></span><input id="excludeAmbiguous" type="checkbox"></label>
+      </section>
+      <label class="card reveal" style="margin-top:12px">
+        <span class="rlabel"><span class="ico"><svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span data-i18n="revealMode"></span></span>
+        <select id="revealMode">
+          <option value="off" data-i18n="revealOff"></option>
+          <option value="hover" data-i18n="revealHover"></option>
+          <option value="dblclick" data-i18n="revealDbl"></option>
+          <option value="focus" data-i18n="revealFocus"></option>
+          <option value="ctrl" data-i18n="revealCtrl"></option>
+        </select>
+      </label>
+    </div>
+    </div>
+  </div>
+
+  <script src="../src/i18n.js"></script>
+  <script src="../src/generator.js"></script>
+  <script src="../src/hibp.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="cs" data-lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Generátor hesel - rozšíření pro Chrome / Password Generator for Chrome</title>
+  <meta name="description" content="Silná hesla jedním klikem, kontrola úniku, historie, vše lokálně v prohlížeči. / Strong passwords in one click, breach check, history, all local.">
+  <link rel="icon" href="img/icon128.png">
+  <style>
+    :root { --bg:#f2f2f7; --card:#fff; --text:#1c1c1e; --muted:#6e6e73; --sep:rgba(60,60,67,.16); --blue:#007aff; --green:#34c759; --orange:#ff9500; --purple:#af52de; }
+    @media (prefers-color-scheme: dark) { :root { --bg:#000; --card:#1c1c1e; --text:#f5f5f7; --muted:#98989f; --sep:rgba(84,84,88,.6); --blue:#0a84ff; } }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin:0; font:17px/1.55 -apple-system,"SF Pro Text","Segoe UI Variable Text","Segoe UI",system-ui,sans-serif; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased; }
+    a { color:var(--blue); text-decoration:none; } a:hover { text-decoration:underline; }
+    .wrap { max-width:1040px; margin:0 auto; padding:0 24px; }
+    nav { position:sticky; top:0; z-index:10; background:color-mix(in srgb,var(--bg) 85%,transparent); backdrop-filter:blur(14px); border-bottom:.5px solid var(--sep); }
+    nav .wrap { display:flex; align-items:center; gap:22px; height:56px; }
+    nav .brand { display:flex; align-items:center; gap:10px; font-weight:700; color:var(--text); }
+    nav .brand img { width:28px; height:28px; border-radius:6px; }
+    nav .links { margin-left:auto; display:flex; gap:20px; font-size:15px; align-items:center; }
+    .langsw button { border:0; background:none; font:inherit; font-size:15px; color:var(--muted); cursor:pointer; padding:4px 6px; border-radius:4px; }
+    html[data-lang="cs"] .langsw .b-cs, html[data-lang="en"] .langsw .b-en { color:var(--blue); font-weight:600; }
+    html[data-lang="cs"] [lang="en"], html[data-lang="en"] [lang="cs"] { display:none !important; }
+
+    .hero { text-align:center; padding:72px 0 36px; }
+    .hero img.logo { width:92px; height:92px; border-radius:20px; box-shadow:0 8px 28px rgba(0,122,255,.3); }
+    h1 { font-size:clamp(34px,6vw,56px); line-height:1.08; letter-spacing:-1.2px; margin:22px 0 14px; }
+    .lead { font-size:clamp(18px,2.4vw,22px); color:var(--muted); max-width:700px; margin:0 auto 28px; }
+    .btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .btn { display:inline-block; padding:13px 24px; border-radius:10px; font-weight:600; font-size:16px; }
+    .btn.primary { background:var(--blue); color:#fff; } .btn.primary:hover { text-decoration:none; filter:brightness(1.08); }
+    .btn.ghost { background:rgba(120,120,128,.14); color:var(--blue); } .btn.ghost:hover { text-decoration:none; background:rgba(120,120,128,.22); }
+    .btn.disabled { background:rgba(120,120,128,.14); color:var(--muted); cursor:default; }
+    .shot { display:block; width:100%; height:auto; border-radius:12px; box-shadow:0 14px 40px rgba(0,0,0,.16), 0 0 0 .5px rgba(0,0,0,.1); }
+    .hero .shot { max-width:820px; margin:44px auto 0; }
+
+    section { padding:60px 0; }
+    h2 { font-size:clamp(28px,4vw,38px); letter-spacing:-.8px; margin:0 0 10px; text-align:center; }
+    .sub { color:var(--muted); text-align:center; max-width:640px; margin:0 auto 36px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:18px; }
+    .card { background:var(--card); border-radius:12px; padding:22px; }
+    .card .ico { width:38px; height:38px; border-radius:8px; display:grid; place-items:center; color:#fff; margin-bottom:14px; }
+    .card .ico svg { width:21px; height:21px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+    .card h3 { margin:0 0 6px; font-size:18px; }
+    .card p { margin:0; color:var(--muted); font-size:15.5px; }
+    .two { display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center; margin-bottom:56px; }
+    .two.rev .txt { order:2; }
+    .two h3 { font-size:26px; letter-spacing:-.5px; margin:0 0 10px; }
+    .two p { color:var(--muted); margin:0 0 10px; }
+    @media (max-width:760px) { .two { grid-template-columns:1fr; } .two.rev .txt { order:0; } }
+    .band { background:var(--card); }
+    ol.steps, ul.plain { padding-left:22px; } ol.steps li, ul.plain li { margin:8px 0; }
+    code, kbd { font:14px ui-monospace,"SF Mono",Consolas,monospace; background:rgba(120,120,128,.14); padding:2px 6px; border-radius:4px; }
+    table { width:100%; border-collapse:collapse; font-size:15px; margin:12px 0 4px; }
+    th, td { text-align:left; padding:10px 12px; border-top:.5px solid var(--sep); vertical-align:top; }
+    th { color:var(--muted); font-weight:600; border-top:0; }
+    .policy { max-width:780px; margin:0 auto; }
+    .policy h3 { margin:30px 0 8px; font-size:20px; }
+    .policy p, .policy li { color:var(--text); }
+    .note { background:rgba(255,149,0,.12); border-left:3px solid var(--orange); padding:12px 16px; border-radius:6px; font-size:15.5px; margin:14px 0; }
+    footer { padding:40px 0 60px; text-align:center; color:var(--muted); font-size:14.5px; }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="img/icon128.png" alt=""><span lang="cs">Generátor hesel</span><span lang="en">Password Generator</span></a>
+    <div class="links">
+      <a href="#funkce"><span lang="cs">Funkce</span><span lang="en">Features</span></a>
+      <a href="#instalace"><span lang="cs">Instalace</span><span lang="en">Install</span></a>
+      <a href="#soukromi"><span lang="cs">Soukromí</span><span lang="en">Privacy</span></a>
+      <a href="#feedback">GitHub</a>
+      <span class="langsw"><button class="b-cs" onclick="setLang('cs')">CZ</button><button class="b-en" onclick="setLang('en')">EN</button></span>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <img class="logo" src="img/icon128.png" alt="">
+    <h1><span lang="cs">Silná hesla jedním klikem.</span><span lang="en">Strong passwords in one click.</span></h1>
+    <p class="lead">
+      <span lang="cs">Rozšíření pro Chrome, které vygeneruje heslo, vloží ho i do potvrzení, zkontroluje, jestli neunikla, a nic přitom neposílá na žádný server.</span>
+      <span lang="en">A Chrome extension that generates a password, fills the confirmation field too, checks whether it has leaked, and never sends anything to a server.</span>
+    </p>
+    <div class="btns">
+      <span class="btn disabled"><span lang="cs">Chrome Web Store (připravuje se)</span><span lang="en">Chrome Web Store (coming soon)</span></span>
+      <a class="btn primary" href="#instalace"><span lang="cs">Jak nainstalovat</span><span lang="en">How to install</span></a>
+      <a class="btn ghost" href="https://github.com/sturmjan/generator-hesel">GitHub</a>
+    </div>
+    <img class="shot" src="img/popup-main.png" alt="Popup rozšíření / extension popup">
+  </div>
+</header>
+
+<section id="funkce">
+  <div class="wrap">
+    <h2><span lang="cs">Co umí</span><span lang="en">What it does</span></h2>
+    <p class="sub"><span lang="cs">Jednoduché na ovládání, přitom s věcmi, které běžné generátory nemají.</span><span lang="en">Simple to use, yet with things most generators lack.</span></p>
+    <div class="grid">
+      <div class="card"><div class="ico" style="background:#007aff"><svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+        <h3><span lang="cs">Silné heslo hned</span><span lang="en">Strong password instantly</span></h3>
+        <p><span lang="cs">Délka 8 až 64 znaků, velká a malá písmena, čísla, speciální znaky, vlastní povolené znaky a vynechání podobných (I l 1 O 0). Generuje se kryptografickým generátorem prohlížeče.</span><span lang="en">8 to 64 characters, upper/lower case, digits, symbols, your own allowed characters and look-alike exclusion (I l 1 O 0). Uses the browser's cryptographic generator.</span></p></div>
+      <div class="card"><div class="ico" style="background:#34c759"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></div>
+        <h3><span lang="cs">Nabídka přímo u pole</span><span lang="en">Offer right at the field</span></h3>
+        <p><span lang="cs">U registračních formulářů se nabídne silné heslo samo. Jedním klikem se vloží do pole i do potvrzení hesla. Funguje i přes pravé tlačítko myši.</span><span lang="en">On sign-up forms a strong password is offered automatically. One click fills the field and the confirmation field. Also available from the right-click menu.</span></p></div>
+      <div class="card"><div class="ico" style="background:#5856d6"><svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3><span lang="cs">Zobrazení hesla v poli</span><span lang="en">Show the password in the field</span></h3>
+        <p><span lang="cs">Při najetí myší, dvojklikem, po kliknutí do pole nebo při držení Ctrl. V poli je navíc ikona kopírování, takže heslo můžeš kdykoli zkopírovat.</span><span lang="en">On hover, double click, focus or while holding Ctrl. A copy icon sits in the field so you can copy the password any time.</span></p></div>
+      <div class="card"><div class="ico" style="background:#34c759"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></div>
+        <h3><span lang="cs">Kontrola úniku</span><span lang="en">Breach check</span></h3>
+        <p><span lang="cs">Ověří heslo v databázi Have I Been Pwned. Odešle se jen prvních 5 znaků otisku, celé heslo prohlížeč nikdy neopustí.</span><span lang="en">Checks the password against Have I Been Pwned. Only the first 5 characters of the hash are sent; the password itself never leaves the browser.</span></p></div>
+      <div class="card"><div class="ico" style="background:#ff9500"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3><span lang="cs">Historie vložených hesel</span><span lang="en">History of inserted passwords</span></h3>
+        <p><span lang="cs">Kdyby se registrace nepovedla, heslo najdeš s webem a časem vložení. Ukládá se jen do zavření prohlížeče, nebo trvale, nebo vůbec. Rozhodneš ty.</span><span lang="en">If a sign-up fails you can find the password with the site and time. Kept until the browser closes, permanently, or not at all. Your choice.</span></p></div>
+      <div class="card"><div class="ico" style="background:#8e8e93"><svg viewBox="0 0 24 24"><path d="M9 4h6v3H9zM6 7h12v13H6z"/><path d="M10 12h4M10 16h4"/></svg></div>
+        <h3><span lang="cs">Čistí schránku</span><span lang="en">Clears the clipboard</span></h3>
+        <p><span lang="cs">Po 30 sekundách, 1 nebo 2 minutách se zkopírované heslo ze schránky samo smaže.</span><span lang="en">The copied password is wiped from the clipboard after 30 seconds, 1 or 2 minutes.</span></p></div>
+      <div class="card"><div class="ico" style="background:#007aff"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg></div>
+        <h3><span lang="cs">7 jazyků a tmavý režim</span><span lang="en">7 languages and dark mode</span></h3>
+        <p><span lang="cs">Čeština, angličtina, němčina, španělština, portugalština, francouzština a italština. Vzhled se řídí světlým nebo tmavým režimem systému.</span><span lang="en">Czech, English, German, Spanish, Portuguese, French and Italian. Follows the system light or dark mode.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="two">
+      <div class="txt">
+        <h3><span lang="cs">Nabídka přímo na stránce</span><span lang="en">The offer, right on the page</span></h3>
+        <p><span lang="cs">Klikneš do pole pro heslo a doplněk navrhne silné heslo. Jedním tlačítkem se vloží a zkopíruje.</span><span lang="en">Click a password field and the extension suggests a strong password. One button inserts and copies it.</span></p>
+      </div>
+      <img class="shot" src="img/page-offer.png" alt="">
+    </div>
+    <div class="two rev">
+      <div class="txt">
+        <h3><span lang="cs">Vidíš, co jsi vložil</span><span lang="en">See what was inserted</span></h3>
+        <p><span lang="cs">Vyplněná pole zůstanou odkrytá s ikonou kopírování. Po odeslání formuláře se zase zakryjí.</span><span lang="en">Filled fields stay visible with a copy icon. They are hidden again when the form is submitted.</span></p>
+      </div>
+      <img class="shot" src="img/page-filled.png" alt="">
+    </div>
+    <div class="two">
+      <div class="txt">
+        <h3><span lang="cs">Nastavení po tvém</span><span lang="en">Settings your way</span></h3>
+        <p><span lang="cs">Délka, sady znaků, odkrývání hesel, mazání schránky i historie. Výchozí hodnoty jsou bezpečné.</span><span lang="en">Length, character sets, reveal mode, clipboard clearing and history. Defaults are safe.</span></p>
+      </div>
+      <img class="shot" src="img/popup-settings.png" alt="">
+    </div>
+    <div class="two rev">
+      <div class="txt">
+        <h3><span lang="cs">Světlý i tmavý režim</span><span lang="en">Light and dark</span></h3>
+        <p><span lang="cs">Vzhled inspirovaný iOS, který se přizpůsobí systému.</span><span lang="en">An iOS-inspired look that follows your system.</span></p>
+      </div>
+      <img class="shot" src="img/popup-dark.png" alt="">
+    </div>
+  </div>
+</section>
+
+<section id="instalace">
+  <div class="wrap">
+    <h2><span lang="cs">Instalace</span><span lang="en">Install</span></h2>
+    <p class="sub"><span lang="cs">Z Chrome Web Store, až bude schválené. Do té doby jde nainstalovat ručně.</span><span lang="en">From the Chrome Web Store once approved. Until then you can install it manually.</span></p>
+    <div class="card" style="max-width:780px;margin:0 auto">
+      <h3><span lang="cs">Ruční instalace (vývojářský režim)</span><span lang="en">Manual install (developer mode)</span></h3>
+      <ol class="steps">
+        <li><span lang="cs">Stáhni repozitář jako ZIP z <a href="https://github.com/sturmjan/generator-hesel/archive/refs/heads/main.zip">GitHubu</a> a rozbal ho.</span><span lang="en">Download the repository as a ZIP from <a href="https://github.com/sturmjan/generator-hesel/archive/refs/heads/main.zip">GitHub</a> and unzip it.</span></li>
+        <li><span lang="cs">Otevři <code>chrome://extensions</code> a zapni <b>Režim pro vývojáře</b>.</span><span lang="en">Open <code>chrome://extensions</code> and enable <b>Developer mode</b>.</span></li>
+        <li><span lang="cs">Klikni na <b>Načíst rozbalené</b> a vyber složku s <code>manifest.json</code>.</span><span lang="en">Click <b>Load unpacked</b> and choose the folder containing <code>manifest.json</code>.</span></li>
+        <li><span lang="cs">Ikonu rozšíření si připni na lištu. Hotovo.</span><span lang="en">Pin the extension icon to the toolbar. Done.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="soukromi">
+  <div class="wrap">
+    <h2><span lang="cs">Soukromí a bezpečnost</span><span lang="en">Privacy and security</span></h2>
+    <p class="sub"><span lang="cs">Krátce: žádné účty, žádné servery, žádná analytika.</span><span lang="en">In short: no accounts, no servers, no analytics.</span></p>
+
+    <div class="policy" lang="cs">
+      <h3>Zásady ochrany osobních údajů</h3>
+      <p><i>Platné od 9. 11. 2026.</i> Rozšíření „Generátor hesel“ neshromažďuje, nesleduje ani nepředává žádné osobní údaje vývojáři ani třetím stranám. Nemá žádné vlastní servery ani analytiku.</p>
+      <h3>Co se děje s hesly</h3>
+      <ul class="plain">
+        <li>Hesla se generují výhradně lokálně v prohlížeči pomocí Web Crypto.</li>
+        <li>Vygenerované heslo se nikam neodesílá. Vloží se jen do pole na stránce, kde to sám vyvoláš.</li>
+        <li><b>Historie vložených hesel</b> (heslo, doména, čas) je volitelná. Výchozí režim ukládá jen do paměti prohlížeče do jeho zavření (<code>chrome.storage.session</code>). Můžeš zvolit trvalé uložení v tomto počítači (<code>chrome.storage.local</code>) nebo historii vypnout. Kdykoli ji jedním kliknutím smažeš. Historie se nesynchronizuje.</li>
+        <li><b>Schránka:</b> heslo se do ní kopíruje jen na tvůj pokyn (nebo podle volby „kopírovat vložené heslo“) a po zvoleném čase se smaže.</li>
+      </ul>
+      <h3>Jediné síťové spojení</h3>
+      <p>Pokud sám klikneš na „Zkontrolovat únik“, rozšíření pošle službě <a href="https://haveibeenpwned.com/API/v3#PwnedPasswords">Have I Been Pwned</a> jen <b>prvních 5 znaků SHA-1 otisku</b> hesla (metoda k-anonymity). Heslo ani celý otisk se neodesílá a služba z toho heslo zjistit nemůže. Jinak rozšíření nekomunikuje po síti.</p>
+      <h3>Co se ukládá</h3>
+      <p>Pouze nastavení (délka, sady znaků, jazyk, režimy) v synchronizovaném úložišti prohlížeče (<code>chrome.storage.sync</code>), případně historie podle výše. Rozšíření nečte obsah stránek, jen zjišťuje, zda na stránce existuje pole pro heslo.</p>
+      <h3>Oprávnění a proč je potřebuje</h3>
+      <table>
+        <tr><th>Oprávnění</th><th>Důvod</th></tr>
+        <tr><td><code>storage</code></td><td>Nastavení a (volitelně) historie.</td></tr>
+        <tr><td><code>clipboardWrite</code></td><td>Kopírování hesla a jeho pozdější smazání ze schránky.</td></tr>
+        <tr><td><code>contextMenus</code></td><td>Položka „Vygenerovat heslo a vložit“ v nabídce pravého tlačítka.</td></tr>
+        <tr><td><code>alarms</code>, <code>offscreen</code></td><td>Časovač a skrytý dokument pro automatické smazání schránky (service worker ke schránce nemá přístup).</td></tr>
+        <tr><td>Přístup k <code>http(s)://*/*</code></td><td>Rozpoznání polí pro heslo, nabídka u pole, vložení a zobrazení hesla v poli. Obsah stránek se nečte ani neodesílá.</td></tr>
+      </table>
+      <h3>Zdrojový kód a kontakt</h3>
+      <p>Kód je otevřený: <a href="https://github.com/sturmjan/generator-hesel">github.com/sturmjan/generator-hesel</a>. Dotazy, chyby a nápady zakládej jako <a href="https://github.com/sturmjan/generator-hesel/issues/new/choose">issue na GitHubu</a>.</p>
+
+      <h3>Informace pro Chrome Web Store</h3>
+      <div class="note"><b>Single purpose:</b> generování silných hesel a jejich vkládání do polí na stránkách. <b>Remote code:</b> ne. <b>Prodej dat:</b> ne.</div>
+      <p><b>Kategorie:</b> Nástroje (Productivity). <b>Jazyky:</b> čeština, angličtina, němčina, španělština, portugalština, francouzština, italština.</p>
+      <p><b>Krátký popis (max 132 znaků):</b><br><code>Silná hesla jedním klikem. Rozpozná pole pro heslo, vloží heslo i do potvrzení, zkontroluje únik a zkopíruje ho do schránky.</code></p>
+      <p><b>Data usage (formulář „Privacy practices“):</b> zaškrtnout „Authentication information“ (hesla zpracovávaná lokálně), nic neprodává, nepoužívá pro účely mimo hlavní funkci ani pro posuzování bonity.</p>
+    </div>
+
+    <div class="policy" lang="en">
+      <h3>Privacy policy</h3>
+      <p><i>Effective 9 November 2026.</i> The "Password Generator" extension does not collect, track or transmit any personal data to the developer or to third parties. It has no servers and no analytics.</p>
+      <h3>What happens to passwords</h3>
+      <ul class="plain">
+        <li>Passwords are generated entirely locally in the browser using Web Crypto.</li>
+        <li>A generated password is never sent anywhere. It is only inserted into a field on the page when you trigger it.</li>
+        <li>The <b>history of inserted passwords</b> (password, domain, time) is optional. By default it is kept in browser memory only until the browser closes (<code>chrome.storage.session</code>). You can choose permanent local storage (<code>chrome.storage.local</code>) or turn it off. You can clear it with one click. It is never synced.</li>
+        <li><b>Clipboard:</b> a password is copied only on your action (or per the "copy inserted password" option) and is wiped after the chosen delay.</li>
+      </ul>
+      <h3>The only network request</h3>
+      <p>If you click "Check for breaches", the extension sends only the <b>first 5 characters of the SHA-1 hash</b> of the password to <a href="https://haveibeenpwned.com/API/v3#PwnedPasswords">Have I Been Pwned</a> (k-anonymity). The password and the full hash are never sent, and the service cannot recover the password. The extension makes no other network requests.</p>
+      <h3>What is stored</h3>
+      <p>Only settings (length, character sets, language, modes) in the browser's sync storage (<code>chrome.storage.sync</code>), plus the optional history described above. The extension does not read page content; it only detects whether a password field exists.</p>
+      <h3>Permissions and why</h3>
+      <table>
+        <tr><th>Permission</th><th>Reason</th></tr>
+        <tr><td><code>storage</code></td><td>Settings and (optionally) history.</td></tr>
+        <tr><td><code>clipboardWrite</code></td><td>Copying the password and wiping it from the clipboard later.</td></tr>
+        <tr><td><code>contextMenus</code></td><td>"Generate password and insert" in the right-click menu.</td></tr>
+        <tr><td><code>alarms</code>, <code>offscreen</code></td><td>Timer and hidden document for the automatic clipboard wipe (service workers cannot access the clipboard).</td></tr>
+        <tr><td>Access to <code>http(s)://*/*</code></td><td>Detecting password fields, the offer next to the field, inserting and revealing the password. Page content is neither read nor sent.</td></tr>
+      </table>
+      <h3>Source code and contact</h3>
+      <p>The code is open: <a href="https://github.com/sturmjan/generator-hesel">github.com/sturmjan/generator-hesel</a>. Please file questions, bugs and ideas as a <a href="https://github.com/sturmjan/generator-hesel/issues/new/choose">GitHub issue</a>.</p>
+
+      <h3>Chrome Web Store submission notes</h3>
+      <div class="note"><b>Single purpose:</b> generating strong passwords and inserting them into page fields. <b>Remote code:</b> no. <b>Selling data:</b> no.</div>
+      <p><b>Category:</b> Productivity. <b>Languages:</b> Czech, English, German, Spanish, Portuguese, French, Italian.</p>
+      <p><b>Short description (max 132 chars):</b><br><code>Strong passwords in one click. Detects password fields, fills the confirmation, checks for breaches and copies to the clipboard.</code></p>
+      <p><b>Data usage ("Privacy practices" form):</b> tick "Authentication information" (passwords handled locally); nothing is sold, used for purposes unrelated to the core function, or used for creditworthiness.</p>
+    </div>
+  </div>
+</section>
+
+<section id="feedback">
+  <div class="wrap" style="text-align:center">
+    <h2><span lang="cs">Chyba nebo nápad?</span><span lang="en">Found a bug or have an idea?</span></h2>
+    <p class="sub"><span lang="cs">Napiš to na GitHub. Stačí účet na GitHubu, zbytek je formulář. Rozšíření má odkaz přímo v okně.</span><span lang="en">Post it on GitHub. A GitHub account and a short form is all it takes. The extension links there from its window too.</span></p>
+    <div class="btns">
+      <a class="btn primary" href="https://github.com/sturmjan/generator-hesel/issues/new?template=bug.yml"><span lang="cs">Nahlásit chybu</span><span lang="en">Report a bug</span></a>
+      <a class="btn ghost" href="https://github.com/sturmjan/generator-hesel/issues/new?template=feature.yml"><span lang="cs">Navrhnout funkci</span><span lang="en">Suggest a feature</span></a>
+      <a class="btn ghost" href="https://github.com/sturmjan/generator-hesel/issues"><span lang="cs">Všechna hlášení</span><span lang="en">All issues</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span lang="cs">Open source pod licencí MIT.</span><span lang="en">Open source under the MIT license.</span>
+    · <a href="https://github.com/sturmjan/generator-hesel">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  function setLang(l) { document.documentElement.setAttribute('data-lang', l); document.documentElement.lang = l; try { localStorage.setItem('lang', l); } catch (e) {} }
+  var saved = null; try { saved = localStorage.getItem('lang'); } catch (e) {}
+  setLang(saved || (/^cs|^sk/i.test(navigator.language || '') ? 'cs' : 'en'));
+</script>
+</body>
+</html>

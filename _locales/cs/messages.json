@@ -1,0 +1,8 @@
+{
+  "extName": {
+    "message": "Generátor hesel"
+  },
+  "extDescription": {
+    "message": "Silná hesla jedním klikem. Rozpozná pole pro heslo, vloží heslo i do potvrzení, zkontroluje únik a zkopíruje ho do schránky."
+  }
+}
