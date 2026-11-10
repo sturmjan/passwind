@@ -3,6 +3,6 @@
     "message": "Passwind - Password Generator"
   },
   "extDescription": {
-    "message": "Strong passwords in one click. Detects password fields, fills the confirmation field, checks for breaches and copies to the clipboard."
+    "message": "Strong passwords in one click. Detects password fields, fills the confirmation, checks for breaches, copies to the clipboard."
   }
 }

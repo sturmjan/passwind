@@ -3,6 +3,6 @@
     "message": "Passwind - Passwortgenerator"
   },
   "extDescription": {
-    "message": "Starke Passwörter mit einem Klick. Erkennt Passwortfelder, füllt das Bestätigungsfeld, prüft auf Datenlecks und kopiert in die Zwischenablage."
+    "message": "Starke Passwörter mit einem Klick. Erkennt Passwortfelder, füllt die Bestätigung, prüft Datenlecks, kopiert in die Zwischenablage."
   }
 }

@@ -3,6 +3,6 @@
     "message": "Passwind - Gerador de palavras-passe"
   },
   "extDescription": {
-    "message": "Palavras-passe fortes com um clique. Deteta campos de palavra-passe, preenche a confirmação, verifica fugas de dados e copia para a área de transferência."
+    "message": "Palavras-passe fortes num clique. Deteta campos, preenche a confirmação, verifica fugas e copia para a área de transferência."
   }
 }
